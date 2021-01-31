@@ -8,7 +8,7 @@ describe('Automation practice application, adding and removing items', () => {
         MainPage.waitForElement(MainPage.cartQuantity);
         MainPage.closeAddtoCartpopUp.click();
         const Result = MainPage.cartQuantity.getText();
-        expect(MainPage.cartQuantity.isDisplayed(), "Shoppin cart should have an item").to.be.true;
+        expect(MainPage.cartQuantity.isDisplayed(), "Shopping cart should have an item").to.be.true;
         expect(Result, "One Item should be added to the cart").to.equal("1");
     });
 
