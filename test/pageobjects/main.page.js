@@ -7,8 +7,8 @@ class MainPage extends Page {
     /**
      * define selectors using getter methods
      */
-    get itemsPopular () { return $$('.product_list.active [title^="Add to cart"]') }
-    get addtoCartpopUp () { return $('#layer_cart') }
+    get itemsPopularAddtocart () { return $$('.product_list.active [title^="Add to cart"]') }
+    get PopularBlocksItems () { return $$('.product_list.active .product-container') }
     get closeAddtoCartpopUp () { return $('.cross[title^="Close window"]') }
     get cartQuantity () { return $('.ajax_cart_quantity.unvisible') }
     get cartEmpty () { return $('.ajax_cart_no_product') }
@@ -24,11 +24,13 @@ class MainPage extends Page {
 
     //Function to click random item on main page to add to cart and close popup
     clickRandomItem(){
-      const index = Math.floor(Math.random() * this.itemsPopular.length);
-      this.itemsPopular[index].click();
-      browser.waitUntil(() => {
-        return this.addtoCartpopUp.isDisplayed()
-      },"Add to Cart Popup is not displayed");
+      const index = Math.floor(Math.random() * this.PopularBlocksItems.length);
+      this.PopularBlocksItems[index].scrollIntoView();
+      this.PopularBlocksItems[index].moveTo();
+      this.itemsPopularAddtocart[index].click();
+       browser.waitUntil(() => {
+         return this.addtoCartpopUp.isDisplayed()
+       },"Add to Cart Popup is not displayed");
     }
 
     //function to wait for element to be visible
